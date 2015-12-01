@@ -1,0 +1,13 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{3}
+\contentsline {section}{\numberline {2}Choice of implementation}{3}
+\contentsline {section}{\numberline {3}Protocol}{3}
+\contentsline {section}{\numberline {4}Algorithm}{4}
+\contentsline {subsection}{\numberline {4.1}Get slice size}{4}
+\contentsline {subsection}{\numberline {4.2}Get slice portion}{5}
+\contentsline {subsection}{\numberline {4.3}Get neighbours}{5}
+\contentsline {section}{\numberline {5}Difficulties meet}{5}
+\contentsline {subsection}{\numberline {5.1}Dividing the matrix}{5}
+\contentsline {subsection}{\numberline {5.2}Number of process}{6}
+\contentsline {subsection}{\numberline {5.3}Protocol}{6}
+\contentsline {section}{\numberline {6}Conclusion}{6}
