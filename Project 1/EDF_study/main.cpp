@@ -32,7 +32,6 @@ unsigned long long* genRun(int u, int nb, int i, bool I, bool S){
         getline(stream, res);
         stream.close();
     }
-    cout<<"l "<<res<<endl;
     istringstream iss(res);
     vector<string> tokens{istream_iterator<string>{iss}, istream_iterator<string>{}};
 
@@ -53,7 +52,6 @@ unsigned long long* run(int u, int nb, int i){
         getline(stream, res);
         stream.close();
     }
-    cout<<"l "<<res<<endl;
     istringstream iss(res);
     vector<string> tokens{istream_iterator<string>{iss}, istream_iterator<string>{}};
 
@@ -94,6 +92,8 @@ int main()
     testI.push_back(0);
     testI.push_back(5);
     testI.push_back(10);
+    testI.push_back(15);
+    testI.push_back(20);
 	vector<int> resI (testI.size(), 0);
 
     unsigned long long* res = new unsigned long long[5];
@@ -142,27 +142,7 @@ int main()
 	for (int j = 0; j< testI.size(); j++){
 	    stream<<resI[j]<<"\t";
 	}
-	stream<<"\n\n\n";
-
-	/*
-    for (int k = 0; k< testI.size(); k++){
-        stream<<testI[k]<<"\t";
-        for (int j = 0; j< testN.size(); j++)
-            stream<<testN[j]<<"\t";
-        stream<<"\n";
-        for (int i = 0; i< testU.size(); i++){
-            stream<<testU[i]<<"\t";
-            for (int j = 0; j< testN.size(); j++){
-                res = genRun(testU[i], testN[j], testI[k], false, false);
-                if (res[1] == 0)
-                    stream<<0<<"\t";
-                else
-                    stream<<1<<"\t";
-            }
-            stream<<"\n";
-        }
-        stream<<"\n\n\n";
-    }*/
+	stream<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 
 	testN.clear();
 
@@ -187,8 +167,9 @@ int main()
         res = genRun(80, testN[j], 75, false, false);
         stream<<res[0]<<"\t";
     }
-    stream<<"\n\n\n";
+    stream<<"\n\n\n\n";
 
+    testN.pop_back();
     testN.pop_back();
     testN.pop_back();
     testN.pop_back();
@@ -226,11 +207,11 @@ int main()
     testI.push_back(90);
     testI.push_back(100);
     stream<<"Switching percent\tExecution time\tIdle time\tSwitching time\tPreemptions\n";
-    res = genRun(55, 4, testI[0], true, true);
+    res = genRun(40, 4, testI[0], true, true);
     stream<<testI[0]<<"\t"<<(float)res[1]*100/(float)res[0]<<"\t"<<(float)res[2]*100/(float)res[0]<<"\t"<<(float)res[3]*100/(float)res[0]<<"\t"<<res[4];
     stream<<"\n";
     for (int j = 1; j< testI.size(); j++){
-        res = run(55, 4, testI[j]);
+        res = run(40, 4, testI[j]);
         stream<<testI[j]<<"\t"<<(float)res[1]*100/(float)res[0]<<"\t"<<(float)res[2]*100/(float)res[0]<<"\t"<<(float)res[3]*100/(float)res[0]<<"\t"<<res[4];
         stream<<"\n";
     }

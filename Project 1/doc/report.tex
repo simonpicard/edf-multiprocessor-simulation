@@ -33,19 +33,21 @@ Once all the tasks are generated some additional adjustment are done to be as cl
 Finally, the generated tasks are written in a file where each line describes one task and contains: Offset Period Deadline WCET.\\
 Here is the options for the generator :
 \begin{verbatim}
--o
+-o arg
     set the output file path
--u
+-u arg
     set the utilization of the resulting system
--n
+-n arg
     set the number of tasks
--p
-    set the floor for the period
--P
-    set the roof for the period
--f
+-p arg | default = 1
+    set the floor for the period (this number wil be multiplicated by "Pfactor")
+-P arg | default = 20
+    set the roof for the period (this number wil be multiplicated by "Pfactor")
+-x arg | default = 10
+    set the roof for the "Pfactor"
+-f arg | default = 0
     set the floor for the offset
--F
+-F arg | default = 10
     set the roof for the offset
 -s
     generated a synchronous system, i.e no offset
@@ -64,7 +66,7 @@ This part of the project is quite simple in its implementation, it has one main 
 
 \section{Difficulties meet}
 The generation of the tasks was a bit complicated because the utilization must be as close as possible but the utilization of each tasks must not be the same so the solution was to use a uniform distribution and then adjust the total utilization, the adjustment will always output an utilization a bit lower than the required rather than a bigger one.\\
-Another issue is that the system can have a really big period, so the period of the tasks are meant to be rather small but the smaller the period, the bigger the imprecision of utilization.\\
+Another issue is that the system can have a really big period, so the period of the tasks are meant to be rather small and multiple of 10.\\
 Finally, during the test I noticed that the tasks would often be not schedulable I therefore set the implicit option in place because it is not about a to big utilization but sometimes the jobs would just not possible to complete two would be released at the same time and have small deadline.
 
 \section{Comparison tests}
@@ -76,81 +78,36 @@ The program create a file res.txt, in order to see the diagrams, the user must c
 
 \section{Study}
 \subsection{Schedulability}
-following different values for the utilization, the number of tasks and the switching time percent we verify if a system if schedulable. See the table down below for the result for a test, a 1 signify that the system is schedulable, a 0 that it is not.\\
+following different values for the utilization, the number of tasks and the switching time percent, the test simulate a hundred randomly generated system and give the number of schedulable one. See the figure down below for the result when varying the utilization.\\
 
 \begin{figure}[H]
 	\begin{center}
-		\begin{tabular}{|c|c|c|c|c|}
-		   \hline
-		   \multicolumn{5}{|c|}{Switching \% = 0} \\
-		   \hline
-		   U& \multicolumn{4}{c|}{Nb. tasks} \\
-		   \hline
-		   &2&4&6&8\\
-		   \hline
-		   40&1&1&1&1\\
-		   \hline
-		   60&1&1&0&1\\
-		   \hline
-		   80&1&0&0&0\\
-		   \hline
-		   90&0&1&1&0\\
-		   \hline
-		   95&0&0&0&0\\
-		   \hline
-		   99&0&0&0&0\\
-		   \hline
-		\end{tabular}
-		\hspace{2em}
-		\begin{tabular}{|c|c|c|c|c|}
-		   \hline
-		   \multicolumn{5}{|c|}{Switching \% = 5} \\
-		   \hline
-		   U& \multicolumn{4}{c|}{Nb. tasks} \\
-		   \hline
-		   &2&4&6&8\\
-		   \hline
-		   40&1&0&1&0\\
-		   \hline
-		   60&1&1&0&0\\
-		   \hline
-		   80&1&0&0&0\\
-		   \hline
-		   90&0&0&0&0\\
-		   \hline
-		   95&0&0&0&0\\
-		   \hline
-		   99&0&0&0&0\\
-		   \hline
-		\end{tabular}
-		\hspace{2em}
-		\begin{tabular}{|c|c|c|c|c|}
-		   \hline
-		   \multicolumn{5}{|c|}{Switching \% = 10} \\
-		   \hline
-		   U& \multicolumn{4}{c|}{Nb. tasks} \\
-		   \hline
-		   &2&4&6&8\\
-		   \hline
-		   40&0&1&0&0\\
-		   \hline
-		   60&1&0&0&0\\
-		   \hline
-		   80&0&0&0&0\\
-		   \hline
-		   90&0&0&0&0\\
-		   \hline
-		   95&0&0&0&0\\
-		   \hline
-		   99&0&0&0&0\\
-		   \hline
-		\end{tabular}
+		\includegraphics{schedU.png}
 	\end{center}
 	\label{sched}
-	\caption{Schedulability}
+	\caption{Schedulability over the utilization}
 \end{figure}
-The first observation is that the more time the system takes to switch or load the job the less system are schedulable this quite obvious because switching and loading are wasted ticks therefore if a deadline is critic the system is directly going to fail, the more time is lost in switching and loading the process, the more deadline might be exceed.\\
-The systems tend to be more schedulable when they have a small utilization and a small number of tasks, for the utilization it is simply because the system is more used than more tasks might miss their deadline, for the number of tasks it is because the more tasks the more deadline and the more chance there for some jobs to have small deadline and beginning in at same tick or in the same window of ticks.\\
+It is clear that the more the utilization, the less the schedulabilty, the explaination is quite simple, the more utilisation the longer the utlisation of the tasks and therefore the bigger the chance to misse a deadline.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics{schedI.png}
+	\end{center}
+	\label{sched}
+	\caption{Schedulability over the switching percent}
+\end{figure}
+
+It appears that a big switching percent is the cause for a system to fail, the switching percent lead to the loss of some ticks and so a bigger probability for a job to miss it deadline.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics{schedN.png}
+	\end{center}
+	\label{sched}
+	\caption{Schedulability over the number of tasks}
+\end{figure}
+
+The result is ambiguous, id there a lot a tasks the jobs will have a small utilisation, they will be loaded and executed rather fast so less chance of preemptions and missing the deadlines, but the more the tasks, the more the chance for two jobs with small deadlines to be realease at the same and miss their deadlines. These two effect are antagonist.
 
 \subsection{Period}
 The period depends on two factor, the offset and the period, it is the least common multiple of all the period plus the biggest offset, so it is LCM(P)+max(o) which is in O(LCM(P)), see the next figure for a graphic of the period in function of the number of tasks.\\
@@ -165,7 +122,7 @@ The period depends on two factor, the offset and the period, it is the least com
 As expected, the period rise extremely fast following the number of tasks.
 
 \subsection{Remark}
-For this test and all the following, the generated tasks systems are synchronized and with implicit deadlines. Synchronized to have correct executing and idle time, otherwise all the first part of the system where all offset are not complete, the utilization of the system is not the one required. Implicit because, as we saw on the schedulability test, lots of system would fail just because the deadline are to small, it is almost impossible to complete a 99% utilization system with deadlines that are not implicit.
+For this test and all the following, the generated tasks systems are synchronized and with implicit deadlines. Synchronized to have correct executing and idle time, otherwise all the first part of the system where all offset are not complete, the utilization of the system is not the one required. Implicit because, as we saw on the schedulability test, lots of system would fail just because the deadline are to small, it is almost impossible to complete a 99\% utilization system with deadlines that are not implicit.
 
 \subsection{Utilization}
 The two first test  are pretty obvious, it can be noticed that the number of tasks does not affect the utilization and that the execution time and the idle time are complementary.
@@ -187,7 +144,7 @@ Now with the same tasks system, this test compare the utilization with different
 	\caption{Utilization over switching time}
 \end{figure}
 
-Firstly, the test has some plateau, this come from the rounding of switching time and from the small size of the number of computing ticks from the job. The execution time always takes the same part of the simulation, what change is idle time and switching. For 60% of switching time and over, the system is not schedulable, this fail can be explained by two reasons, either there would more than 100% of the total utilization of the system, that the idle could not compensate the switching time, or that the switching time of a job will make it miss it deadline even though there is still some idle time.
+Firstly, the test has some plateau, this come from the rounding of switching time and from the small size of the number of computing ticks from the job. The execution time always takes the same part of the simulation, what change is idle time and switching. For 60\% of switching time and over, the system is not schedulable, this fail can be explained by two reasons, either there would more than 100\% of the total utilization of the system, that the idle could not compensate the switching time, or that the switching time of a job will make it miss it deadline even though there is still some idle time.
 
 \subsection{Preemption}
 \begin{figure}[H]

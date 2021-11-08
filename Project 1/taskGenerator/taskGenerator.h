@@ -13,6 +13,7 @@ class taskGenerator
         void setLP(int v);
         void setHO(int v);
         void setLO(int v);
+        void setPF(int v);
         void setI(bool v);
     protected:
     private:
@@ -23,6 +24,7 @@ class taskGenerator
         int m_highO;
         int m_lowP;
         int m_lowO;
+        int m_Pfact;
         bool m_i;
 
         int* generateUtilisation();

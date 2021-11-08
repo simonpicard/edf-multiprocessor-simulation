@@ -13,8 +13,9 @@ taskGenerator::taskGenerator(int nbTasks, int utilisation, char* path)
     m_path = path;
     m_highP = 20;
     m_lowP = 1;
-    m_highO = 5;
+    m_highO = 10;
     m_lowO = 0;
+	m_Pfact = 10;
     m_i = false;
 }
 
@@ -123,7 +124,7 @@ int* taskGenerator::generateUtilisation()
 int* taskGenerator::generatePCD(int utilisation, int lowP, int highP)
 {
     int* res = new int[3];
-    res[0] = ((rand()%(highP-lowP))+lowP)*10;
+    res[0] = ((rand()%(highP-lowP))+lowP)*m_Pfact;
     res[1] = round((float) res[0]*((float)utilisation/100));
     if (res[1] == 0)
         res[1]++;
@@ -187,6 +188,11 @@ void taskGenerator::setLP(int v)
 void taskGenerator::setLO(int v)
 {
 	m_lowO = v;
+}
+
+void taskGenerator::setPF(int v)
+{
+	m_Pfact = v;
 }
 
 void taskGenerator::setI(bool v)

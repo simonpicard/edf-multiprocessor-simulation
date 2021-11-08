@@ -38,4 +38,4 @@ clean:
 	rm -rf bin/*.o
 
 mrproper: clean
-	rm dist/*
+	rm dist/taskGenerator dist/EDF_study dist/simEDF

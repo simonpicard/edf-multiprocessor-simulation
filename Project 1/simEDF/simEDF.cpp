@@ -76,7 +76,6 @@ bool simEDF::sortR(Job i, Job j)
     else if (iR > jR)
         return false;
     else{
-        //cout<<"   "<<i.getName()<<" : "<<i.getD()<<" "<<j.getName()<<" : "<<j.getD()<<endl;
         return i.getD() < j.getD();
     }
 }
@@ -97,7 +96,7 @@ void simEDF::simulate()
     string current = "";
     int sT;
     int preemptions = 0;
-    cout<<HP<<endl;
+    cout<<"Going to simulate "<<HP<<" ticks"<<endl;
     for(m_a = 0; m_a < HP; m_a++){
         if (m_jobs.at(0).done()){
             Task* t = m_jobs.at(0).getTask();

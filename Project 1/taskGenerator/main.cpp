@@ -12,11 +12,12 @@ int main(int argc, char **argv)
     int highP = -1;
     int lowO = -1;
     int highO = -1;
+    int Pfact = -1;
     bool implicit = false;
     bool synchronous = false;
     char* path = NULL;
     int c;
-    while ((c = getopt (argc, argv, "u:n:o:p:P:f:F:is")) != -1)
+    while ((c = getopt (argc, argv, "u:n:o:p:P:f:F:isx:")) != -1)
     switch (c)
     {
         case 'u':
@@ -45,6 +46,9 @@ int main(int argc, char **argv)
             break;
         case 's':
             synchronous = true;
+            break;
+        case 'x':
+            Pfact = atoi(optarg);
             break;
         case '?':
             std::cout<<"error"<<std::endl;
@@ -86,6 +90,10 @@ int main(int argc, char **argv)
     if (implicit){
         tg.setI(true);
     }
+
+	if (Pfact > 1){
+		tg.setPF(Pfact);
+	}
 
     tg.generateTasks();
 
