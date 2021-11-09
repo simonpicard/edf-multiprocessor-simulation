@@ -125,18 +125,45 @@ following different values for the utilization, the number of tasks and
 the switching time percent, the test simulate a hundred randomly
 generated system and give the number of schedulable one. See the figure
 down below for the result when varying the utilization.  
-![Schedulability over the utilization](schedU.png){#sched} It is clear that the more the
-utilization, the less the schedulabilty, the explaination is quite
-simple, the more utilisation the longer the utlisation of the tasks and
-therefore the bigger the chance to misse a deadline.
 
-![Schedulability over the switching percent](schedI.png){#sched}
+<div class="center">
+
+<figure>
+<img src="doc/schedU.png" id="sched" alt="Schedulability over the utilization" />
+<figcaption aria-hidden="true">Schedulability over the utilization</figcaption>
+</figure>
+
+</div>
+
+
+It is clear that the more the utilization, the less the schedulabilty,
+the explaination is quite simple, the more utilisation the longer the
+utlisation of the tasks and therefore the bigger the chance to misse a
+deadline.
+
+<div class="center">
+
+<figure>
+<img src="doc/schedI.png" id="sched" alt="Schedulability over the switching percent" />
+<figcaption aria-hidden="true">Schedulability over the switching percent</figcaption>
+</figure>
+
+</div>
+
 
 It appears that a big switching percent is the cause for a system to
 fail, the switching percent lead to the loss of some ticks and so a
 bigger probability for a job to miss it deadline.
 
-![Schedulability over the number of tasks](schedN.png){#sched}
+<div class="center">
+
+<figure>
+<img src="doc/schedN.png" id="sched" alt="Schedulability over the number of tasks" />
+<figcaption aria-hidden="true">Schedulability over the number of tasks</figcaption>
+</figure>
+
+</div>
+
 
 The result is ambiguous, id there a lot a tasks the jobs will have a
 small utilisation, they will be loaded and executed rather fast so less
@@ -150,8 +177,19 @@ The period depends on two factor, the offset and the period, it is the
 least common multiple of all the period plus the biggest offset, so it
 is LCM(P)+max(o) which is in O(LCM(P)), see the next figure for a
 graphic of the period in function of the number of tasks.  
-![Period](periodtasks.png){#period} As expected, the period rise
-extremely fast following the number of tasks.
+
+<div class="center">
+
+<figure>
+<img src="doc/periodtasks.png" id="period" alt="Period" />
+<figcaption aria-hidden="true">Period</figcaption>
+</figure>
+
+</div>
+
+
+As expected, the period rise extremely fast following the number of
+tasks.
 
 ## Remark
 
@@ -168,15 +206,27 @@ deadlines that are not implicit.
 
 The two first test are pretty obvious, it can be noticed that the number
 of tasks does not affect the utilization and that the execution time and
-the idle time are complementary. <div id="u">![](nbtaskstime.png){#u0 width=50.0%}
-![](utilisationtime.png){#u1 width=50.0%}
+the idle time are complementary.
 
-Utilization
+<div class="center">
+
+![image](nbtaskstime.png) ![image](utilisationtime.png)
+
 </div>
 
 
 Now with the same tasks system, this test compare the utilization with
-different switching time : ![Utilization over switching time](switchingtime.png){#us}
+different switching time :
+
+<div class="center">
+
+<figure>
+<img src="doc/switchingtime.png" id="us" alt="Utilization over switching time" />
+<figcaption aria-hidden="true">Utilization over switching time</figcaption>
+</figure>
+
+</div>
+
 
 Firstly, the test has some plateau, this come from the rounding of
 switching time and from the small size of the number of computing ticks
@@ -190,10 +240,10 @@ deadline even though there is still some idle time.
 
 ## Preemption
 
-<div id="p">![](nbtaskspreemption.png){#p0 width=50.0%}
-![](utilisationpreemption.png){#p1 width=50.0%}
+<div class="center">
 
-Preemptions
+![image](doc/nbtaskspreemption.png) ![image](doc/utilisationpreemption.png)
+
 </div>
 
 
@@ -201,7 +251,15 @@ These tests do not make anything appear, there is apparently no
 correlation between the utilization or the number of tasks and the
 number of preemption.
 
-![Preemptions](switchingpreemption.png){#p}
+<div class="center">
+
+<figure>
+<img src="doc/switchingpreemption.png" id="p" alt="Preemptions" />
+<figcaption aria-hidden="true">Preemptions</figcaption>
+</figure>
+
+</div>
+
 
 Here, it is noticeable that the more the switching time the more
 preemption, this makes sense because after some switching a new job with
