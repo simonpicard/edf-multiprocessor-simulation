@@ -210,7 +210,7 @@ the idle time are complementary.
 
 <div class="center">
 
-![image](nbtaskstime.png) ![image](utilisationtime.png)
+![image](doc/nbtaskstime.png) ![image](doc/utilisationtime.png)
 
 </div>
 
