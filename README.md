@@ -8,6 +8,8 @@ cd dist
 ./EDF_study
 ```
 
+See results in `study.txt`.
+
 ## Introduction
 
 The purpose of the project is to implement an EDF scheduler which is a
