@@ -18,7 +18,7 @@ propriety.
 
 ## Implementation
 
-#### Tasks generator
+### Tasks generator
 
 The first step is to divide the total utilization of the system by the
 number of tasks but some it is more interesting if the tasks do not have
@@ -88,7 +88,7 @@ Once all step are done, the simulator output the total period, the
 execution ticks, the idle ticks, the switching ticks and the number of
 preemptions.
 
-#### EDF study
+### EDF study
 
 This part of the project is quite simple in its implementation, it has
 one main function genRun which given the properties for the tasks
@@ -129,7 +129,7 @@ the dialogue, the diagrams are now updated with the new data.
 
 ## Study
 
-#### Schedulability
+### Schedulability
 
 following different values for the utilization, the number of tasks and
 the switching time percent, the test simulate a hundred randomly
@@ -181,7 +181,7 @@ chance of preemptions and missing the deadlines, but the more the tasks,
 the more the chance for two jobs with small deadlines to be realease at
 the same and miss their deadlines. These two effect are antagonist.
 
-#### Period
+### Period
 
 The period depends on two factor, the offset and the period, it is the
 least common multiple of all the period plus the biggest offset, so it
@@ -201,7 +201,7 @@ graphic of the period in function of the number of tasks.
 As expected, the period rise extremely fast following the number of
 tasks.
 
-#### Remark
+### Remark
 
 For this test and all the following, the generated tasks systems are
 synchronized and with implicit deadlines. Synchronized to have correct
@@ -212,7 +212,7 @@ test, lots of system would fail just because the deadline are to small,
 it is almost impossible to complete a 99% utilization system with
 deadlines that are not implicit.
 
-#### Utilization
+### Utilization
 
 The two first test are pretty obvious, it can be noticed that the number
 of tasks does not affect the utilization and that the execution time and
@@ -248,7 +248,7 @@ utilization of the system, that the idle could not compensate the
 switching time, or that the switching time of a job will make it miss it
 deadline even though there is still some idle time.
 
-#### Preemption
+### Preemption
 
 <div class="center">
 
